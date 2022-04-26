@@ -1,26 +1,86 @@
-import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import React, { Component, useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  const [currentTime, setCurrentTime] = useState(0);
+class App extends Component {
+    state = {
 
-  useEffect(() => {
-    fetch('/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time);
-    });
-  }, []);
+        // Initially, no file is selected 
+        selectedFile: null
+    };
 
-  return (
-    <div className="App">
-      <header className="App-header">
+    // On file select (from the pop up) 
+    onFileChange = event => {
+        // Update the state 
+        this.setState({ selectedFile: event.target.files[0] });
+    };
 
-        ... no changes in this part ...
+    // On file upload (click the upload button) 
+    onFileUpload = () => {
+        // Create an object of formData 
+        const formData = new FormData();
 
-        <p>The current time is {currentTime}.</p>
-      </header>
-    </div>
-  );
+        // Update the formData object 
+        formData.append(
+            "file",
+            this.state.selectedFile,
+            this.state.selectedFile.name
+        );
+
+        // Details of the uploaded file 
+        console.log(this.state.selectedFile);
+
+        // Request made to the backend api 
+        // Send formData object 
+        axios.post("api/upload", formData);
+    };
+
+    // File content to be displayed after 
+    // file upload is complete 
+    fileData = () => {
+        if (this.state.selectedFile) {
+
+            return (
+                <div>
+                    <h2>File Details:</h2>
+                    <p>File Name: {this.state.selectedFile.name}</p>
+                    <p>File Type: {this.state.selectedFile.type}</p>
+                    <p>
+                        Last Modified:{" "}
+                        {this.state.selectedFile.lastModifiedDate.toDateString()}
+                    </p>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <br />
+                    <h4>Choose before Pressing the Upload button</h4>
+                </div>
+            );
+        }
+    };
+
+    render() {
+        return (
+            <div>
+                <h1>
+                    RunningPose
+                </h1>
+                <h3>
+                    Upload video to be analyzed:
+                </h3>
+                <div>
+                    <input type="file" onChange={this.onFileChange} />
+                    <button onClick={this.onFileUpload}>
+                        Upload!
+                    </button>
+                </div>
+                {this.fileData()}
+            </div>
+        );
+    }
 }
 
 export default App;
