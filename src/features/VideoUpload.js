@@ -43,6 +43,9 @@ export const VideoUpload = () => {
                         Last Modified:{" "}
                         {selectedFile.lastModifiedDate.toDateString()}
                     </p>
+                    <form action="/delete" method="post">
+                        <button name="deletedBtn" type="submit">Delete</button>
+                    </form>
                 </div>
             );
         } else {
