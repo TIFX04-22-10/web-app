@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from "react";
+import './VideoUpload.css'
 
 export const VideoUpload = () => {
     const [selectedFile, setSelectedFile] = useState();
@@ -22,9 +23,6 @@ export const VideoUpload = () => {
             selectedFile.name
         );
 
-        // Details of the uploaded file 
-        console.log(selectedFile);
-
         // Request made to the backend api 
         // Send formData object 
         axios.post("api/upload", formData);
@@ -36,7 +34,7 @@ export const VideoUpload = () => {
         if (selectedFile) {
             return (
                 <div>
-                    <h2>File Details:</h2>
+                <h2>File Details:</h2>
                     <p>File Name: {selectedFile.name}</p>
                     <p>File Type: {selectedFile.type}</p>
                     <p>
@@ -51,25 +49,27 @@ export const VideoUpload = () => {
         } else {
             return (
                 <div>
-                    <br />
-                    <h4>Choose before Pressing the Upload button</h4>
                 </div>
             );
         }
     };
 
     return (
+            <div className="videoupload">
+                <p className='instructions'> 
+                    How to use the service: <br/>
+                    1. Upload video to be analyzed <br/>
+                    2. Press 'Upload' <br/>
+                    3. See result below! <br/>
+                </p>
             <div>
-            <h3>
-                Upload video to be analyzed:
-            </h3>
-            <div>
+                <p className='formats'>Allowed formats: .mp4, .avi, .npy</p>
                 <input type="file" onChange={onFileChange} />
                 <button onClick={onFileUpload}>
-                    Upload!
+                    Upload
                 </button>
             </div>
-            {fileData()}
+            {fileData}
         </div>
     );
 }
