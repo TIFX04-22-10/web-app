@@ -1,5 +1,5 @@
 import os, shutil
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, send_file, send_from_directory, abort
 from PIL import Image
 from werkzeug.utils import secure_filename
 
@@ -27,13 +27,20 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/get-image/<int:image_number>')
+def get_image(image_number):
+    try:
+        return send_from_directory(app.config['OUTPUT_FOLDER'], path='output-'+str(image_number)+'.png', as_attachment=True)
+    except FileNotFoundError:
+        abort(404)
+
 @app.route('/api/upload', methods = ['POST'])
 def onFileUpload():
     file = request.files['file']
     if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            extractFrames('bubbles.gif', 'output')
+            extractFrames('runner3.gif', 'output')
             #return redirect(url_for('download_file', name=filename))
     return "done"
 
