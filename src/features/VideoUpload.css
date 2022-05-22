@@ -1,6 +1,31 @@
 .videoupload {
-  color: white;
-  text-align: center;
+  color: #344854;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 80px;
+  margin-top: 20px;
+}
+
+.upload {
+  flex-grow: 0;
+  background-color: white;
+  width: 700px;
+  padding: 20px;
+}
+
+.links {
+  background-color: white;
+  width: 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 50px;
 }
 
 .instructions{
@@ -10,4 +35,24 @@
 .formats {
   font-style: italic;
   font-size: 12px;
+}
+
+a:link {
+  text-decoration: none;
+  color: #344854;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #344854;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #344854;
+}
+
+a:active {
+  text-decoration: underline;
+  color: #344854;
 }

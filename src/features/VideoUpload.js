@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from "react";
-import './VideoUpload.css'
+import './VideoUpload.css';
+import { Button, Form } from 'react-bootstrap';
 
 export const VideoUpload = () => {
     const [selectedFile, setSelectedFile] = useState();
@@ -55,21 +56,27 @@ export const VideoUpload = () => {
     };
 
     return (
-            <div className="videoupload">
-                <p className='instructions'> 
-                    How to use the service: <br/>
-                    1. Upload video to be analyzed <br/>
-                    2. Press 'Upload' <br/>
-                    3. See result below! <br/>
-                </p>
-            <div>
+        <div className="videoupload">
+            <div className='upload'>
+                <h2>RunningPose</h2>
+                <h5>An innovative tool for analyzing joints</h5>
+                <p>Using video footage of a running person, the keypoint positions
+can be predicted in 3D with a deviation of 115 millimeters in all dimensions, and the data
+can be used to calculate joint angles.</p>
+                <Form.Group controlId="formFileSm" className="mb-3">
+                    <Form.Label>Upload video to be analyzed</Form.Label>
+                    <Form.Control type="file" size="sm" onChange={onFileChange}/>
+                </Form.Group>
                 <p className='formats'>Allowed formats: .mp4, .avi, .npy</p>
-                <input type="file" onChange={onFileChange} />
-                <button onClick={onFileUpload}>
-                    Upload
-                </button>
+                <Button onClick={onFileUpload}>
+                    Analyze
+                </Button>
             </div>
             {fileData}
+            <div className="links">
+                {/* <i class="fas fa-arrow-circle-right"></i> */} 
+                <h3> <a href="https://github.com/TIFX04-22-10/runningpose">GitHub</a></h3>
+            </div>
         </div>
     );
 }
