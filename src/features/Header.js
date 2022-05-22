@@ -1,23 +1,20 @@
-import { Container, Navbar, Nav } from "react-bootstrap";
-import logo from '../resources/Logo.png';
+import { Container, Navbar } from "react-bootstrap";
+import logo from '../resources/RunningPose_black.png';
 import './Header.css';
 
 export const Header = () => {
 	return (
 		<>
-			<Navbar expand="lg" className="navbar">
-				<Container>
-					<Navbar.Brand href="#home">
-            <img src={logo} width="200px" alt="RunningPose"/>
-					</Navbar.Brand>
-					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav">
-						<Nav className="nav">
-							<Nav.Link href="">About</Nav.Link>
-						</Nav>
-					</Navbar.Collapse>
-				</Container>
-			</Navbar>
+			<Navbar bg="light" expand="lg">
+  		<Container className="container-header">
+    		<Navbar.Brand href="">
+					<img src={logo} alt="logo" width="100px"/>
+				</Navbar.Brand>
+    		<Navbar.Toggle aria-controls="basic-navbar-nav" />
+    		<Navbar.Collapse id="basic-navbar-nav">
+    		</Navbar.Collapse>
+  		</Container>
+		</Navbar>
 		</>
 	);
 };

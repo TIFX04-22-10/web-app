@@ -1,8 +1,8 @@
 .navbar {
-  background-color: #2F2FA2;
+  background-color: white;
+  align-items: flex-start;
 }
 
 .nav {
-  color: white;
-  text-align: right;
+  color: #344854;
 }
